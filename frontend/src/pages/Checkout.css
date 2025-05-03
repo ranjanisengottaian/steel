@@ -1,0 +1,157 @@
+
+
+body {
+  background-color: #fdfdfd;
+  font-size: 16px;
+}
+
+.checkout-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.checkout-container h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.checkout-container h3 {
+  font-size: 1.5rem;
+  color: #34495e;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.checkout-container ul {
+  list-style: none;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.checkout-container li {
+  padding: 12px 0;
+  border-bottom: 1px solid #ecf0f1;
+  font-size: 1.1rem;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-info span {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.checkout-container .totals {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+.checkout-container .totals p,
+.checkout-container .totals h4 {
+  margin: 5px 0;
+}
+
+.checkout-container .totals p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+.checkout-container .totals h4 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.checkout-container textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fdfdfd;
+  resize: none;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.checkout-container button {
+  width: 100%;
+  padding: 14px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.checkout-container button:hover {
+  background-color: #16a085;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.success-screen {
+  text-align: center;
+  background-color: #f0fefb;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.tick-animation svg {
+  animation: tick-pop 0.8s ease-out forwards;
+  margin-bottom: 25px;
+}
+
+@keyframes tick-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-screen h2 {
+  font-size: 2rem;
+  color: #27ae60;
+  margin-top: 15px;
+}
+
+.success-screen p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 20px;
+  }
+
+  .checkout-container button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
