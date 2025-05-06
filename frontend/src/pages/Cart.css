@@ -1,4 +1,4 @@
-.cart-container {
+/* .cart-container {
   padding: 2rem;
   max-width: 800px;
   margin: auto;
@@ -89,5 +89,147 @@
   font-size: 16px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+} */
+
+.cart-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.sort-section {
+  font-size: 14px;
+  color: #444;
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.cart-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.cart-details {
+  flex: 1;
+}
+
+.cart-product-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.cart-subtext {
+  font-size: 14px;
+  color: #666;
+}
+
+.cart-subtext span {
+  font-weight: 600;
+  color: #333;
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-quantity button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #c0392b;
+  cursor: pointer;
+}
+
+.cart-quantity span {
+  width: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.cart-price {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 20px;
+  min-width: 60px;
+}
+
+.cart-delete {
+  margin-left: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  color: red;
+}
+
+.cart-footer {
+  margin-top: 30px;
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+}
+
+.discount-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.discount-area input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.discount-area button {
+  background-color: #ffcc00;
+  border: none;
+  padding: 8px 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.checkout-area {
+  text-align: right;
+}
+
+.proceed-btn {
+  background-color: #ffcc00;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
 }
