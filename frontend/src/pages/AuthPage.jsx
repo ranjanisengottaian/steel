@@ -1,5 +1,4 @@
 // src/pages/AuthPage.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -68,7 +67,15 @@ function AuthPage() {
       } else {
         login(res.data.user, res.data.token);
         setMessage({ type: 'success', text: 'Login successful!' });
-        setTimeout(() => navigate('/'), 1500);
+
+        // ✅ Redirect admin to /admin, others to /
+        setTimeout(() => {
+          if (res.data.user.email === 'admin@gmail.com') {
+            navigate('/admin');
+          } else {
+            navigate('/');
+          }
+        }, 1500);
       }
     } catch (err) {
       setMessage({

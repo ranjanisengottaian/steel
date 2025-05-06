@@ -1,7 +1,5 @@
-// src/App.js
-
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -13,12 +11,18 @@ import Cart from './pages/Cart';
 import Services from './pages/Services';
 import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
+import AdminPanel from './pages/AdminPanel';
 
 function App() {
+  const location = useLocation();
+
+  // Hide user navbar if route starts with "/admin"
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <AuthProvider>
       <>
-        <Navbar />
+        {!isAdminRoute && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<AuthPage />} />
@@ -29,6 +33,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/admin/*" element={<AdminPanel />} />
         </Routes>
       </>
     </AuthProvider>

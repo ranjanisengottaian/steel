@@ -27,13 +27,14 @@ router.get('/test', (req, res) => {
   res.send('Product route working ✅');
 });
 
-// ✅ Seed route to insert a test product (now includes category)
+// ✅ Seed route to insert a test product
 router.get('/seed', async (req, res) => {
   try {
     const sample = await Product.create({
       name: "Test Steel Rod",
       description: "High-strength steel rod for industrial use.",
       price: 120.5,
+      unit: "₹/kg",  // ✅ Added
       category: "Structural Steel",
       imageUrl: "https://via.placeholder.com/200"
     });

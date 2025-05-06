@@ -7,7 +7,7 @@ const Order = require('../models/Order');
 const Cart = require('../models/Cart');
 const User = require('../models/User');
 
-// Create a new order
+// ✅ Create a new order
 router.post('/', authMiddleware, async (req, res) => {
   const userId = req.user.id;
 
@@ -15,33 +15,26 @@ router.post('/', authMiddleware, async (req, res) => {
     const user = await User.findById(userId);
     const cartItems = await Cart.find({ userId }).populate('productId');
 
-    // If cart is empty, return an error
     if (!cartItems.length) return res.status(400).json({ message: 'Cart is empty' });
 
-    // Prepare order items
     const items = cartItems.map(item => ({
       productId: item.productId._id,
       quantity: item.quantity
     }));
 
-    // Calculate total amount
     const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.productId.price, 0);
 
-    // Create new order
     const order = new Order({
       userId,
       items,
       totalAmount,
       address: user.address,
-      country: user.country,  // Added country
-      state: user.state,      // Added state
+      country: user.country,
+      state: user.state,
       paymentMethod: 'Cash on Delivery'
     });
 
-    // Save the order to the database
     await order.save();
-
-    // Clear the cart for the user after placing the order
     await Cart.deleteMany({ userId });
 
     res.status(200).json({ message: 'Order placed successfully' });
@@ -51,37 +44,53 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-// Get all orders for the authenticated user
+// ✅ Get all orders for the authenticated user
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.user.id }).populate('items.productId');
-    res.status(200).json(orders); // Include country and state in the response
+    res.status(200).json(orders);
   } catch (err) {
     console.error('Error fetching orders:', err);
     res.status(500).json({ message: 'Error fetching orders' });
   }
 });
 
-// Cancel an order (and delete it)
+// ✅ Cancel an order
 router.put('/:orderId/cancel', authMiddleware, async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId);
-
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
+    if (!order) return res.status(404).json({ message: 'Order not found' });
 
     if (order.status === 'Shipped') {
       return res.status(400).json({ message: 'Cannot cancel a shipped order' });
     }
 
-    // Delete the order instead of updating status
     await Order.findByIdAndDelete(req.params.orderId);
-
     res.status(200).json({ message: 'Order cancelled and deleted successfully' });
   } catch (error) {
     console.error('Error cancelling order:', error);
     res.status(500).json({ message: 'Error cancelling order' });
+  }
+});
+
+// ✅ NEW: Update order status (for admin panel)
+router.patch('/update-status/:orderId', async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  try {
+    const updated = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+
+    if (!updated) return res.status(404).json({ message: 'Order not found' });
+
+    res.status(200).json({ message: 'Order status updated successfully', order: updated });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ message: 'Error updating status' });
   }
 });
 

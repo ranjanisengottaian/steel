@@ -1,0 +1,79 @@
+.manage-orders-page {
+  padding: 5px;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.manage-orders-page h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #1f1f1f;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.orders-table {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  padding: 25px;
+  transition: box-shadow 0.3s ease;
+}
+
+.orders-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.orders-table th,
+.orders-table td {
+  text-align: left;
+  padding: 16px 20px;
+  border-bottom: 1px solid #ebebeb;
+  font-size: 15px;
+  color: #444;
+}
+
+.orders-table th {
+  background-color: #101820;
+  color: #ffffff;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.orders-table tr:hover {
+  background-color: #f9f9f9;
+  transition: background 0.2s ease-in;
+}
+
+.orders-table select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #fff;
+  transition: border 0.2s ease;
+}
+
+.orders-table select:hover,
+.orders-table select:focus {
+  border-color: #007bff;
+}
+
+.orders-table ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.orders-table li {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #333;
+}

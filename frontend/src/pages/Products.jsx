@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext'; // Ensure you have AuthContext to manage token
+import { useAuth } from '../context/AuthContext';
 import './products.css';
 
 const categoryOptions = [
   'All Categories',
   'Accessories & Fittings',
-  'Fabrication Materials'
+  'Fabrication Materials',
+  'Structural Steel',
+  'Steel Sheets & Plates',
+  'Pipes & Tubes',
+  'Stainless Steel',
+  'TMT Bars'
 ];
 
 const Products = () => {
@@ -19,9 +24,8 @@ const Products = () => {
     maxPrice: ''
   });
 
-  const { token } = useAuth(); // Access token from auth context
+  const { token } = useAuth();
 
-  // Fetch products from backend
   const fetchProducts = async () => {
     setLoading(true);
     setError('');
@@ -56,20 +60,18 @@ const Products = () => {
   };
 
   const handleAddToCart = async (productId) => {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
-  
+    const token = localStorage.getItem('token');
     if (!token) {
       alert('⚠️ Please log in to add items to your cart.');
       return;
     }
-    alert(productId);
     try {
       await axios.post(
         'http://localhost:5000/api/cart/add',
         { productId },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Include token in the Authorization header
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -79,68 +81,71 @@ const Products = () => {
       alert('❌ Could not add to cart.');
     }
   };
-  
 
   return (
     <div className="products-page">
-      <h2 className="products-title">🛠️ Our Steel Products</h2>
-      <p className="products-subtitle">Explore the strength and durability of our wide range of steel materials.</p>
+      
+      <div className="products-layout">
+        <div className="sidebar-filters">
+          <h3>🔎 Filter Options</h3>
+          <form onSubmit={handleFilterSubmit}>
+            <label>Category:</label>
+            <select name="category" value={filters.category} onChange={handleInputChange}>
+              {categoryOptions.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
 
-      {/* Filter UI */}
-      <form className="product-filters" onSubmit={handleFilterSubmit}>
-        <select
-          name="category"
-          value={filters.category}
-          onChange={handleInputChange}
-        >
-          {categoryOptions.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
+            <label>Min Price:</label>
+            <input
+              type="number"
+              name="minPrice"
+              placeholder="Min Price"
+              value={filters.minPrice}
+              onChange={handleInputChange}
+            />
 
-        <input
-          type="number"
-          name="minPrice"
-          placeholder="Min Price"
-          value={filters.minPrice}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="maxPrice"
-          placeholder="Max Price"
-          value={filters.maxPrice}
-          onChange={handleInputChange}
-        />
-        <button type="submit">🔍 Filter</button>
-      </form>
+            <label>Max Price:</label>
+            <input
+              type="number"
+              name="maxPrice"
+              placeholder="Max Price"
+              value={filters.maxPrice}
+              onChange={handleInputChange}
+            />
 
-      {/* Product List */}
-      {loading ? (
-        <p className="products-subtitle">Loading products...</p>
-      ) : error ? (
-        <p className="products-subtitle error">{error}</p>
-      ) : products.length > 0 ? (
-        <div className="product-card-container">
-          {products.map((product) => (
-            <div className="product-card" key={product._id}>
-              <img
-                src={product.imageUrl || '/img/Steel-rod.jpg'}
-                alt={product.name}
-                onError={(e) => (e.target.src = '/img/Steel-rod.jpg')}
-              />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p><strong>₹{product.price}</strong></p>
-              <button onClick={() => handleAddToCart(product._id)} className="add-to-cart-btn">
-                🛒 Add to Cart
-              </button>
-            </div>
-          ))}
+            <button type="submit">Apply Filters</button>
+          </form>
         </div>
-      ) : (
-        <p className="products-subtitle">No products available with selected filters.</p>
-      )}
+
+        <div className="products-content">
+          {loading ? (
+            <p className="products-subtitle">Loading products...</p>
+          ) : error ? (
+            <p className="products-subtitle error">{error}</p>
+          ) : products.length > 0 ? (
+            <div className="product-card-container">
+              {products.map((product) => (
+                <div className="product-card" key={product._id}>
+                  <img
+                    src={product.imageUrl || '/img/Steel-rod.jpg'}
+                    alt={product.name}
+                    onError={(e) => (e.target.src = '/img/Steel-rod.jpg')}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p className="product-price red-price">{`Rs.${product.price}/kg`}</p>
+                  <button onClick={() => handleAddToCart(product._id)} className="add-to-cart-btn">
+                    🛒 Add to Cart
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="products-subtitle">No products available with selected filters.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
