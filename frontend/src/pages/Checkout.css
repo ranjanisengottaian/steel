@@ -1,4 +1,4 @@
-
+/* 
 
 body {
   background-color: #fdfdfd;
@@ -153,5 +153,134 @@ body {
   .checkout-container button {
     padding: 12px;
     font-size: 1rem;
+  }
+} */
+.checkout-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  
+}
+
+.checkout-container h2,
+.checkout-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.checkout-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.items-left,
+.summary-right {
+  flex: 1;
+  min-width: 260px;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.totals p,
+.totals h4 {
+  margin: 10px 0;
+  text-align: right;
+}
+
+.totals h4 {
+  font-weight: bold;
+  color: #333;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: steelblue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-success {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.tick-animation {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  position: relative;
+}
+
+.tick-animation::before {
+  content: '';
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #2ecc71;
+  position: absolute;
+  animation: tick-pop 0.5s ease-out forwards;
+}
+
+.tick-animation svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: tick-draw 0.5s ease 0.4s forwards;
+  opacity: 0;
+}
+
+@keyframes tick-pop {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes tick-draw {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

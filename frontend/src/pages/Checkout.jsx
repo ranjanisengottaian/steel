@@ -87,7 +87,7 @@ const Checkout = () => {
           </svg>
         </div>
         <h2>Order Placed Successfully!</h2>
-        <p>Your order is now being processed.</p>
+        <p >Your order is now being processed.</p>
       </div>
     );
   }
